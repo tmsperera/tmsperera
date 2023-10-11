@@ -15,9 +15,4 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-
-It's **Mahesh Perera**.
-
-Also known as "**tmsperera**"
-
 [https://linktr.ee/tmsperera](https://linktr.ee/tmsperera)
