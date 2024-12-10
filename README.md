@@ -1,4 +1,12 @@
-### Hi there 👋
+## Hello 👋
+
+I'm **Mahesh Perera**, a Software Engineer with a passion for building great software. My expertise includes full-stack development on PHP and VueJS. In my free time, I enjoy riding and spending time outdoors.
+
+### Reach Me
+- Email: tmsperera@gmail.com
+- LinkedIn: [tmsperera](https://www.linkedin.com/in/tmsperera)
+- X: [tmsperera](https://x.com/tmsperera)
+- Linktree: [tmsperera](https://linktr.ee/tmsperera](https://linktr.ee/tmsperera)
 
 <!--
 **tmsperera/tmsperera** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
@@ -14,5 +22,3 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-
-[https://linktr.ee/tmsperera](https://linktr.ee/tmsperera)
