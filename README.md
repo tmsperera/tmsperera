@@ -1,4 +1,4 @@
-# 👋 I’m Mahesh Perera
+# 👋 I’m Mahesh Perera...
 
 A Software Engineer with a passion for building great software. My expertise is on full-stack web development technologies comes around PHP, Laravel and VueJS. In my free time, I enjoy riding and spending time outdoors exploring scenic ladnscapes.
 
