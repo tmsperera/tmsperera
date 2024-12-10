@@ -1,6 +1,6 @@
-# Hello 👋
+# Hello 👋, I'm Mahesh Perera...
 
-I'm **Mahesh Perera**, a Software Engineer with a passion for building great software. My expertise includes full-stack development on PHP and VueJS. In my free time, I enjoy riding and spending time outdoors.
+A Software Engineer with a passion for building great software. My expertise includes full-stack development on PHP and VueJS. In my free time, I enjoy riding and spending time outdoors.
 
 ### Reach Me
 - Email: tmsperera@gmail.com
