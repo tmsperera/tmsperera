@@ -6,7 +6,6 @@ An **Artisan** with a passion for building **great** software. My expertise is m
 - Email: tmsperera@gmail.com
 - LinkedIn: [tmsperera](https://www.linkedin.com/in/tmsperera)
 - X: [tmsperera](https://x.com/tmsperera)
-- Linktree: [tmsperera](https://linktr.ee/tmsperera)
 
 <!--
 **tmsperera/tmsperera** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
