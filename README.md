@@ -1,11 +1,11 @@
-# 👋 I’m Mahesh (TMS) Perera...
+# 👋 I’m Mahesh Perera...
 
 A software **Artisan** with passion. In my free time, I enjoy riding outdoors and exploring scenic landscapes.
 
 ### Reach Me
 - Email: tmsperera@gmail.com
-- LinkedIn: [tmsperera](https://www.linkedin.com/in/tmsperera)
 - X: [tmsperera](https://x.com/tmsperera)
+- LinkedIn: [tmsperera](https://www.linkedin.com/in/tmsperera)
 
 <!--
 **tmsperera/tmsperera** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
