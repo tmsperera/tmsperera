@@ -1,6 +1,6 @@
 # 👋 I’m Mahesh (TMS) Perera...
 
-An **Artisan** with a passion for building **great** software. My expertise is mostly on full-stack web development technologies around PHP, Laravel and VueJS ecosystems. In my free time, I enjoy riding and spending time outdoors exploring scenic landscapes.
+A software **Artisan** with passion. In my free time, I enjoy riding outdoors and exploring scenic landscapes.
 
 ### Reach Me
 - Email: tmsperera@gmail.com
