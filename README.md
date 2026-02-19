@@ -1,6 +1,6 @@
 # 👋 I’m Mahesh Perera...
 
-A software **Artisan** with passion. In my free time, I enjoy riding outdoors and exploring scenic landscapes.
+A software ***Artisan*** with passion. In my free time, I enjoy riding outdoors and exploring scenic landscapes.
 
 ### Reach Me
 - Email: tmsperera@gmail.com
