@@ -65,11 +65,11 @@ I build full-stack web applications — from multi-tenant SaaS platforms to e-co
 
 ## 📊 GitHub Stats
 
-![tmsperera stats](https://github-readme-stats.vercel.app/api?username=tmsperera&show_icons=true&theme=radical&hide_title=false)
+![tmsperera's Stats](https://github-readme-stats.vercel.app/api?username=tmsperera&theme=default&show_icons=true&hide_border=false&count_private=true)
 
-![tmsperera streak](https://github-readme-streak-stats.herokuapp.com/?user=tmsperera&theme=radical)
+![tmsperera's Streak](https://github-readme-streak-stats.herokuapp.com/?user=tmsperera&theme=default&hide_border=false)
 
-![tmsperera top langs](https://github-readme-stats.vercel.app/api/top-langs/?username=tmsperera&layout=compact&theme=radical)
+![tmsperera's Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=tmsperera&theme=default&show_icons=true&hide_border=false&layout=compact)
 
 ---
 
