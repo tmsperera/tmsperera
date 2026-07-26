@@ -8,6 +8,12 @@ I build full-stack web applications — from multi-tenant SaaS platforms to e-co
 
 ---
 
+## Blog
+
+- [Mastering Complex Query Filtering in Laravel: The Simple Way](./blog/laravel-query-filtering.md)
+
+---
+
 ## ⚡ What I Do
 
 **Backend craftsmanship** — Laravel is my home turf. I design systems around SOLID principles, the Clean Architecture, Event Sourcing, and Test-Driven Development. I care about code that's maintainable five years from now, not just code that ships today.
