@@ -10,7 +10,7 @@ I build full-stack web applications — from multi-tenant SaaS platforms to e-co
 
 ## Blog
 
-- [Mastering Complex Query Filtering in Laravel: The Simple Way](./blog/laravel-query-filtering.md)
+- [Mastering Complex Query Filtering in Laravel: The Simple Way](./blog/1/laravel-query-filtering.md)
 
 ---
 

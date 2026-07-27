@@ -87,7 +87,7 @@ class ProductFilter extends IndexQueryFilter
     public function apply(Builder $builder): Builder
     {
         parent::apply($builder); // Apply common filters
-        $this->stockStatus->apply($builder); // Apply product-specific logic
+        $this->stockStatus->apply($builder); // Apply product-specific filter logic
         return $builder;
     }
 }
@@ -100,16 +100,12 @@ Now, look at how clean the controller becomes. The filtering logic is entirely d
 ```php
 public function __invoke(Request $request)
 {
-    $queryFilter = new ProductFilter($request, ['name', 'stock_quantity', 'created_at']);
-    $scoutFilter = new ScoutTrashStatusFilter($request);
+    $queryFilter = new ProductFilter($request);
 
     return Product::search($queryFilter->search->value())
         ->query(fn (ProductBuilder $query) => $query
-            ->whereSearchable()
-            ->latest()
             ->tap(fn (ProductBuilder $query) => $queryFilter->apply($query))
         )
-        ->tap(fn (ScoutBuilder $scoutBuilder) => $scoutFilter->apply($scoutBuilder))
         ->paginate($queryFilter->perPage->value());
 }
 ```
@@ -124,6 +120,23 @@ The same pattern can be applied to other builders, like **Laravel Scout**. By de
 interface ScoutQueryFilter
 {
     public function apply(ScoutBuilder $builder): ScoutBuilder;
+}
+```
+
+Controllers (including Scout!)
+
+```php
+public function __invoke(Request $request)
+{
+    $queryFilter = new ProductFilter($request);
+    $scoutFilter = new ScoutTrashStatusFilter($request);
+
+    return Product::search($queryFilter->search->value())
+        ->query(fn (ProductBuilder $query) => $query
+            ->tap(fn (ProductBuilder $query) => $queryFilter->apply($query))
+        )
+        ->tap(fn (ScoutBuilder $scoutBuilder) => $scoutFilter->apply($scoutBuilder))
+        ->paginate($queryFilter->perPage->value());
 }
 ```
 
