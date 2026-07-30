@@ -1,153 +1,130 @@
-# Mastering Complex Query Filtering in Laravel: The Simple Way
+# Simple Approach to Complex Query Filtering in Laravel
 
-When building data-rich applications, we often end up with controllers that are drowning in conditional logic. `if ($request->has('search'))`, `if ($request->has('order_by'))`, `if ($request->has('status'))` – sound familiar?
+Filtering data in Laravel often starts simple but quickly devolves into a mess of `if ($request->has(...))` statements scattered across controllers. As your application grows, these queries become harder to maintain and test.
 
-This "Controller Bloat" makes code hard to read, harder to test, and nearly impossible to reuse.
-
-In this article, I’ll show you a simple, object-oriented approach to tackling complex query filtering using **Composition**.
+In this article, I'll show you how I tackled complex query filtering using a simple, composable, and type-safe approach.
 
 ---
 
-## 1. The Core Interface: `EloquentQueryFilter`
+## The Goal: Clean Controllers
 
-Everything starts with a simple contract. We want every filter to do two things:
-1. **Apply** itself to an Eloquent builder.
-2. **Expose** its current value (useful for UI or Data Objects).
+The objective was to transform a potentially bloated controller into something declarative and readable:
 
 ```php
-interface EloquentQueryFilter
+public function __invoke(IndexProductsRequest $request): Response
 {
-    public function apply(Builder $builder): Builder;
-    public function value(): mixed;
+    $filter = $request->getFilter();
+
+    $products = Product::search($filter->searchFilter->value())
+        ->query(fn (ProductBuilder $query) => $query
+            ->tap(fn ($q) => $filter->applyEloquent($q))
+        )
+        ->tap(fn ($scout) => $filter->applyScout($scout))
+        ->paginate($filter->perPageFilter->value());
+
+    return Inertia::render('admin/products/index', [
+        'products' => $products,
+        'filters' => ProductFilterData::fromProductFilter($filter),
+    ]);
 }
 ```
 
-## 2. Granular, Reusable "Leaf" Filters
+## The Architecture
 
-Instead of one giant filter class, we create tiny, focused ones. For example, an `OrderByFilter` only cares about two things: the allowed columns and the sort direction.
+The system relies on four key components:
+
+1.  **Custom Form Requests**: For encapsulating filter initialization.
+2.  **Composite Filters**: To aggregate multiple filtering rules.
+3.  **Leaf Filters**: Single-responsibility classes for specific fields.
+4.  **Data Transfer Objects (DTOs)**: To bridge the state to the frontend with type safety.
+
+### 1. The Request as a Factory
+
+Instead of building filters in the controller, we let the `FormRequest` handle it. This keeps the controller focused on the high-level flow.
 
 ```php
-class OrderByFilter implements EloquentQueryFilter
+class IndexProductsRequest extends IndexRequest
 {
-    public function apply(Builder $builder): Builder
-    {
-        $value = $this->value();
-        if (!$value) return $builder;
-
-        return $builder->orderBy($value->column, $value->ascending ? 'asc' : 'desc');
-    }
-
-    public function value(): ?OrderByFilterData
-    {
-        // ... extract and validate from Request
+    public function getFilter(): ProductFilter {
+        return new ProductFilter(request: $this);
     }
 }
 ```
 
-## 3. The Power of Composition: `IndexQueryFilter`
+### 2. Composition Over Inheritance
 
-Most of our index pages share common filtering needs: search, trash status, ordering, and pagination. We can group these into a base `IndexQueryFilter`.
+A `ProductFilter` isn't just one big query; it’s a collection of smaller filters. It inherits base filters (like Search, Sort, Pagination) and adds domain-specific ones.
 
 ```php
-class IndexQueryFilter implements EloquentQueryFilter
+class ProductFilter extends IndexFilter
 {
-    public SearchFilter $search;
-    public OrderByFilter $orderBy;
-    // ...
+    public ProductStockStatusFilter $productStockStatusFilter;
 
     public function __construct(Request $request) {
-        $this->search = new SearchFilter($request);
-        $this->orderBy = new OrderByFilter($request, ['created_at']);
+        parent::__construct($request);
+        $this->productStockStatusFilter = new ProductStockStatusFilter($request);
+    }
+
+    public function applyEloquent(Builder $builder): Builder {
+        $builder = parent::applyEloquent($builder);
+        return $this->productStockStatusFilter->apply($builder);
+    }
+}
+```
+
+### 3. The "Leaf" Filter: Single Responsibility
+
+Each individual filter class is responsible for exactly one thing: reading its value from the request and applying it to the query builder.
+
+```php
+class ProductStockStatusFilter implements EloquentQueryFilter
+{
+    protected string $key = 'stockStatus';
+
+    public function apply(ProductBuilder|Builder $builder): ProductBuilder {
+        $value = $this->value();
+        return $value ? $builder->whereStockStatus($value) : $builder;
+    }
+
+    public function value(): ?ProductStockStatus {
+        return ProductStockStatus::tryFrom($this->request->input($this->key));
+    }
+}
+```
+
+### 4. Closing the Loop with DTOs
+
+When using Inertia.js or any SPA, you need to send the current filter state back to the frontend. We use a DTO to ensure the frontend knows exactly what filters are active, complete with TypeScript support.
+
+```php
+#[TypeScript]
+class ProductFilterData extends IndexFilterData
+{
+    public function __construct(
+        public ?string $search,
+        public ?ProductStockStatus $stockStatus,
         // ...
-    }
+    ) {}
 
-    public function apply(Builder $builder): Builder
-    {
-        $this->orderBy->apply($builder);
-        $this->trashStatus->apply($builder);
-        return $builder;
-    }
-}
-```
-
-## 4. Extending for Domain Specifics
-
-When we need product-specific filters (like stock status), we simply extend the base filter. No need to rewrite the search or ordering logic!
-
-```php
-class ProductFilter extends IndexQueryFilter
-{
-    public ProductStockStatusFilter $stockStatus;
-
-    public function __construct(Request $request, array $allowedOrderByColumns) {
-        parent::__construct($request, $allowedOrderByColumns);
-        $this->stockStatus = new ProductStockStatusFilter($request);
-    }
-
-    public function apply(Builder $builder): Builder
-    {
-        parent::apply($builder); // Apply common filters
-        $this->stockStatus->apply($builder); // Apply product-specific filter logic
-        return $builder;
+    public static function fromProductFilter(ProductFilter $filter): static {
+        return new ProductFilterData(
+            search: $filter->searchFilter->input(),
+            stockStatus: $filter->productStockStatusFilter->value(),
+        );
     }
 }
 ```
-
-## 5. The Result: Clean, Declarative Controllers (including Scout!)
-
-Now, look at how clean the controller becomes. The filtering logic is entirely decoupled from the HTTP layer. This pattern also works beautifully when you're using **Laravel Scout** for searching.
-
-```php
-public function __invoke(Request $request)
-{
-    $queryFilter = new ProductFilter($request);
-
-    return Product::search($queryFilter->search->value())
-        ->query(fn (ProductBuilder $query) => $query
-            ->tap(fn (ProductBuilder $query) => $queryFilter->apply($query))
-        )
-        ->paginate($queryFilter->perPage->value());
-}
-```
-
----
-
-## Bonus: Interface for Different Builders
-
-The same pattern can be applied to other builders, like **Laravel Scout**. By defining a `ScoutQueryFilter` interface, you can handle search engine specific logic (like `withTrashed()` on a Scout builder) with the same clean, composable approach.
-
-```php
-interface ScoutQueryFilter
-{
-    public function apply(ScoutBuilder $builder): ScoutBuilder;
-}
-```
-
-Controllers (including Scout!)
-
-```php
-public function __invoke(Request $request)
-{
-    $queryFilter = new ProductFilter($request);
-    $scoutFilter = new ScoutTrashStatusFilter($request);
-
-    return Product::search($queryFilter->search->value())
-        ->query(fn (ProductBuilder $query) => $query
-            ->tap(fn (ProductBuilder $query) => $queryFilter->apply($query))
-        )
-        ->tap(fn (ScoutBuilder $scoutBuilder) => $scoutFilter->apply($scoutBuilder))
-        ->paginate($queryFilter->perPage->value());
-}
-```
-
----
 
 ## Why This Works
 
-1.  **Readability**: The controller tells you *what* it's doing, not *how* to filter the database.
-2.  **Reusability**: `OrderByFilter` or `SearchFilter` can be used across any model.
-3.  **Testability**: You can unit test individual filters without spinning up a full HTTP request or a database.
-4.  **Type Safety**: By using DTOs in the `value()` method, you get IDE autocompletion and prevent "stringly-typed" bugs.
+1.  **Reusability**: `SearchFilter` or `PerPageFilter` can be dropped into any new module.
+2.  **Scout & Eloquent Integration**: The same filter object can handle both full-text search (Scout) and standard database queries (Eloquent).
+3.  **Testability**: You can test individual filter classes in isolation.
+4.  **Type Safety**: Enums and DTOs prevent "magic strings" from causing bugs.
 
-Tackling complexity doesn't require complex tools—sometimes, a little bit of object-oriented composition is all you need.
+By separating the **extraction** of filter values from the **application** of query logic, we achieve a clean, maintainable system that stays simple regardless of how many filters you add.
+
+---
+
+*What do you think? How do you handle complex filtering in your Laravel apps?*
 
