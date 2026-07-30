@@ -1,8 +1,8 @@
-# Hi, I'm Mahesh 👨‍💻
+# Mahesh Perera
 
-**Software Engineer · 9+ years · Laravel & React Artisan**
+**Software Engineer** · 9+ years · Laravel, React & TypeScript
 
-I build full-stack web applications — from multi-tenant SaaS platforms to e-commerce and real estate systems. My craft is rooted in clean architecture, test-driven development, and a relentless attention to the details that make software *feel* right.
+I build full-stack web applications — from multi-tenant SaaS platforms to e-commerce and real estate systems — grounded in clean architecture, test-driven development, and a focus on software that is both maintainable and polished.
 
 📍 Western Province, Sri Lanka
 
@@ -14,19 +14,19 @@ I build full-stack web applications — from multi-tenant SaaS platforms to e-co
 
 ---
 
-## ⚡ What I Do
+## Expertise
 
-**Backend craftsmanship** — Laravel is my home turf. I design systems around SOLID principles, the Clean Architecture, Event Sourcing, and Test-Driven Development. I care about code that's maintainable five years from now, not just code that ships today.
+**Backend** — Laravel is my primary domain. I design systems around SOLID principles, Clean Architecture, Event Sourcing, and Test-Driven Development, prioritizing long-term maintainability alongside timely delivery.
 
-**Frontend that feels alive** — React, Vue, Next.js, TypeScript, Inertia.js, Tailwind. I sweat the details on animations, hydration, performance, and UX polish.
+**Frontend** — React, Vue, Next.js, TypeScript, Inertia.js, Tailwind CSS. I focus on animations, hydration, performance, and UX refinement.
 
-**Infrastructure I own end-to-end** — Docker, Caddy, Nginx, GitHub Actions, VPS deployments. I don't just write code — I ship it, monitor it, and keep it running.
+**Infrastructure** — Docker, Caddy, Nginx, GitHub Actions, VPS deployments. I own the full lifecycle from development through shipping, monitoring, and operations.
 
-**Multi-tenant SaaS architecture** — Currently deep in building a multi-tenant Laravel platform (`stancl/tenancy`, Fortify, PostgreSQL), solving real problems around auth guards, tenant isolation, and typed full-stack routing with Wayfinder.
+**Multi-tenant SaaS** — Currently building a multi-tenant Laravel platform using `stancl/tenancy`, Fortify, and PostgreSQL, addressing auth guards, tenant isolation, and typed full-stack routing with Wayfinder.
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 **Languages & Frameworks**
 
@@ -60,16 +60,16 @@ I build full-stack web applications — from multi-tenant SaaS platforms to e-co
 
 ---
 
-## 🎯 Engineering Philosophy
+## Engineering Philosophy
 
-- **Test-Driven Development** — tests come first, confidence comes second
-- **SOLID Principles & Clean Architecture** — code that scales with the team, not against it
-- **Event Sourcing** — when the history of *how* state changed matters as much as the state itself
-- **Pragmatism over over-engineering** — the simplest solution that's actually correct wins
+- **Test-Driven Development** — tests first, confidence follows
+- **SOLID & Clean Architecture** — code that scales with the team, not against it
+- **Event Sourcing** — when the history of state changes matters as much as the state itself
+- **Pragmatism** — the simplest correct solution wins
 
 ---
 
-## 📊 GitHub Stats
+## GitHub Stats
 
 ![tmsperera's Stats](https://github-readme-stats.vercel.app/api?username=tmsperera&theme=default&show_icons=true&hide_border=false&count_private=true)
 
@@ -79,13 +79,13 @@ I build full-stack web applications — from multi-tenant SaaS platforms to e-co
 
 ---
 
-## 🌱 Off the Clock
+## Beyond the Keyboard
 
-When I'm not at the keyboard, you'll find me chasing scenic landscapes — turns out debugging hydration mismatches and finding the right mountain road require the same patience.
+When I'm not building software, I'm chasing scenic landscapes — debugging hydration mismatches and finding the right mountain road require the same patience.
 
 ---
 
-## 📫 Let's Connect
+## Connect
 
 ![tmsperera](https://komarev.com/ghpvc/?username=tmsperera&label=Profile%20views&color=0e75b6&style=flat)
 
