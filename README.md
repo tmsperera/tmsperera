@@ -67,15 +67,19 @@ I build full-stack web applications — from multi-tenant SaaS platforms to e-co
 - **Event Sourcing** — when the history of state changes matters as much as the state itself
 - **Pragmatism** — the simplest correct solution wins
 
----
+[//]: # (---)
 
-## GitHub Stats
+[//]: # ()
+[//]: # (## GitHub Stats)
 
-![tmsperera's Stats](https://github-readme-stats.vercel.app/api?username=tmsperera&theme=default&show_icons=true&hide_border=false&count_private=true)
+[//]: # ()
+[//]: # (![tmsperera's Stats]&#40;https://github-readme-stats.vercel.app/api?username=tmsperera&theme=default&show_icons=true&hide_border=false&count_private=true&#41;)
 
-![tmsperera's Streak](https://github-readme-streak-stats.herokuapp.com/?user=tmsperera&theme=default&hide_border=false)
+[//]: # ()
+[//]: # (![tmsperera's Streak]&#40;https://streak-stats.demolab.com/?user=tmsperera&theme=default&hide_border=false&#41;)
 
-![tmsperera's Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=tmsperera&theme=default&show_icons=true&hide_border=false&layout=compact)
+[//]: # ()
+[//]: # (![tmsperera's Top Languages]&#40;https://github-readme-stats.vercel.app/api/top-langs/?username=tmsperera&theme=default&show_icons=true&hide_border=false&layout=compact&#41;)
 
 ---
 
